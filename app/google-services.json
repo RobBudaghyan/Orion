@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "431178497780",
+    "project_id": "spanakh-e83df",
+    "storage_bucket": "spanakh-e83df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431178497780:android:1afdc6687455163767a8a1",
+        "android_client_info": {
+          "package_name": "com.example.orion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIzxTVKrFxnK6HfDtASqrr4IV6Kzf4lSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

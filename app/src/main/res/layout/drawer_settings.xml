@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_drawer"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:orientation="vertical"
+    android:background="@drawable/box_right_background">
+
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/fragment_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:theme="@style/Theme.Spanakh"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sounds"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="start"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_sounds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/switch_thumb"
+            app:track="@drawable/switch_track"
+            app:trackTint="@color/secondary_1"
+            app:thumbTint="@color/text_color"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Biometric\nVerification"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="start"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_bio_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/switch_thumb"
+            app:track="@drawable/switch_track"
+            app:trackTint="@color/secondary_1"
+            app:thumbTint="@color/text_color"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Change ID#"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="start"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/change_id_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_style"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/orbitron_black"
+            android:textStyle="bold"
+            android:text="Change"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Version"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="start"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1.2"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="end"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

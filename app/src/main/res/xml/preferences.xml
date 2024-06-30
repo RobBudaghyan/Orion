@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+        app:key="sounds_preference"
+        app:title="Sounds"
+        app:defaultValue="false"
+        app:iconSpaceReserved="false"
+        />
+    <SwitchPreferenceCompat
+        app:key="biometric_verification_preference"
+        app:title="Biometric Verification"
+        app:defaultValue="false"
+        app:iconSpaceReserved="false"
+        android:thumb="@drawable/switch_thumb"
+        android:track="@drawable/switch_track"
+        />
+
+</PreferenceScreen>

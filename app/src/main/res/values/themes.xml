@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Orion" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <item name="colorPrimary">@color/primary_1</item>
+
+        <item name="colorPrimaryVariant">#09ab07</item>
+        <item name="colorOnPrimary">#040404</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorSecondaryVariant">#181818</item>
+        <item name="colorOnSecondary">#000</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/black</item>
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        <!-- Apply the custom text appearance to various components -->
+        <item name="android:textAppearance">@style/CustomTextAppearance</item>
+        <item name="android:editTextStyle">@style/CustomTextAppearance</item>
+        <item name="android:buttonStyle">@style/CustomTextAppearance</item>
+        <item name="android:checkedTextViewStyle">@style/CustomTextAppearance</item>
+        <item name="android:radioButtonStyle">@style/CustomTextAppearance</item>
+        <item name="android:switchStyle">@style/CustomTextAppearance</item>
+        <item name="android:textViewStyle">@style/CustomTextAppearance</item>
+
+        <item name="android:windowBackground">@color/primary_2</item>
+
+    </style>
+
+    
+    <style name="CustomTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/orbitron_black</item>
+        <item name="android:fontFamily">@font/orbitron_black</item>
+    </style>
+
+
+</resources>

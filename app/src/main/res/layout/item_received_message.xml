@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/message"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/box_round_corners_background">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:src="@drawable/ic_message"/>
+    <TextView
+        android:id="@+id/message_received"
+        android:text="Message Received"
+        android:fontFamily="@font/orbitron_black"
+        android:layout_weight="0.6"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_width="0dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:textColor="@color/text_color"/>
+    <TextView
+        android:background="@drawable/box_round_corners_background"
+        android:layout_margin="5dp"
+        android:id="@+id/sender_Id_Tv"
+        android:textSize="12sp"
+        android:fontFamily="@font/orbitron_black"
+        android:text="#----"
+        android:layout_weight="0.3"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:textColor="@color/text_color"/>
+</LinearLayout>
+
