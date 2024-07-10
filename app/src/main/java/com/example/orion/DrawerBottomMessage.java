@@ -49,7 +49,10 @@ public class DrawerBottomMessage extends BottomSheetDialogFragment {
         copyBtn = v.findViewById(R.id.copy_btn);
 
         // Set the click listener
-        closeBtn.setOnClickListener(view -> dismiss());
+        closeBtn.setOnClickListener(v1 -> {
+            dismiss();
+            MainActivity.playSlideSound(getContext());
+        });
 
         copyBtn.setOnClickListener(view -> {
             // Get the text from messageTv
@@ -62,6 +65,8 @@ public class DrawerBottomMessage extends BottomSheetDialogFragment {
 
             // Provide feedback to the user
             copyBtn.setText("❐ COPIED!");
+
+            MainActivity.playAffirmativeButtonSound(getContext());
         });
 
 

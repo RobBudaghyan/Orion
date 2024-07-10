@@ -71,14 +71,14 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
 
     // Constant Values
     private static final String TAG = "TAG_LOG";
-    private static final int MESSAGES_UPDATE_TIME = 2000; // in milliseconds
-    private static final int NETWORK_CHECK_TIME = 5000; // in milliseconds
-    private static final int TOAST_MESSAGE_SHOW_TIME = 2000; // in milliseconds
+    private static final int MESSAGES_UPDATE_TIME = 2000;
+    private static final int NETWORK_CHECK_TIME = 5000;
+    private static final int TOAST_MESSAGE_SHOW_TIME = 2000;
 
     // UI elements
     private final FirebaseFirestore dataBase = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth;
-    private static MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
     private ProgressBar progressBar;
     private ProgressBar progressBarRadar;
     private TextView connectionId;
@@ -102,10 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
     private DrawerSettings drawerSettings;
     private DrawerLayout drawerLayout;
     private int progressStatus = 0;
-
-    private boolean isFormatting;
-    private int lastStart;
-    private int lastEnd;
+    private static Random random;
 
 
     @Override
@@ -145,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
 
         // Ensure secure window flag
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        random = new Random();
 
         // Initialize keys
         try {
@@ -172,12 +170,25 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             startActivity(i);
         }
 
+        inputId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                playKeyboardClickSound(getApplicationContext());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
         // Add text changed listener to update message length TextView
         inputMessage.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                playKeyboardClickSound(getApplicationContext());
+            }
             @SuppressLint("SetTextI18n")
             @Override
             public void afterTextChanged(Editable s) {
@@ -187,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
 
         // Send button click listener
         sendBtn.setOnClickListener(v -> {
+            playButtonSound(getApplicationContext());
             String inputIdText = inputId.getText().toString().trim();
             String inputMessageText = inputMessage.getText().toString().trim();
             if (inputIdText.isEmpty() || inputMessageText.isEmpty()) {
@@ -208,9 +220,27 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
                 } else {
                     showToast("ERROR checking user ID!", TOAST_MESSAGE_SHOW_TIME);
                 }
-
-
             });
+        });
+
+        // Add DrawerListener to handle drawer events
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            boolean flag = true;
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                if (flag){
+                    MainActivity.playSlideSound(getApplicationContext());
+                    flag = false;
+                }
+                if(slideOffset == 1 || slideOffset == 0)
+                    flag = true;
+            }
+            @Override
+            public void onDrawerOpened(View drawerView) {}
+            @Override
+            public void onDrawerClosed(View drawerView) {}
+            @Override
+            public void onDrawerStateChanged(int newState) {}
         });
 
         // Restoring Document IDs in Android Lifecycle
@@ -367,6 +397,11 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
         public void run() {
             checkFirestoreCollection();
             updateAllTimeAgoValues();
+            try {
+                TextView connectionIdTextView = findViewById(R.id.connectionId_textview);
+                if (connectionIdTextView.getText().toString().equals("- - - -"))
+                    connectionIdTextView.setText(getConnectionIdValue());
+            } catch (Exception ignored) {}
             mainhandler.postDelayed(this, MESSAGES_UPDATE_TIME); // Check every 3 seconds
         }
     };
@@ -565,6 +600,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
     private final Runnable progressbarRunnable = new Runnable() {
         @Override
         public void run() {
+            //if(connectionId.getText().toString().equals("- - - -") || R.layout.activity_no_connection)
             if(connectionId.getText().toString().equals("- - - -"))
                 progressStatus = 0;
             progressStatus += 1;
@@ -577,6 +613,9 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             } else {
                 progressbarHandler.postDelayed(this, MESSAGES_UPDATE_TIME / 100);
             }
+
+            if(progressStatus == 2)
+                playProgressBarSound(getApplicationContext());
         }
     };
 
@@ -590,6 +629,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
 
     // Update UI with Received Message Fragment
     private void addReceivedMessageFragment(DocumentSnapshot doc) {
+        playMessageReceivedSound(getApplicationContext());
         ItemReceivedMessage fragment = new ItemReceivedMessage();
         Bundle args = new Bundle();
         args.putString("senderId", doc.getString("sender"));
@@ -644,6 +684,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
         setContentView(R.layout.activity_no_connection);
         retryButton = findViewById(R.id.retryButton);
         retryButton.setOnClickListener(v -> {
+            playButtonSound(getApplicationContext());
             if (isConnectedToInternet()) {
                 startActivity(new Intent(MainActivity.this, MainActivity.class));
             }
@@ -674,22 +715,74 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
 
     /// not sorted methods here
 
-//    public static void playClickSound(Context context) {
-//        if (soundsEnabled) {
-//            if (mediaPlayer == null) {
-//                mediaPlayer = MediaPlayer.create(context, R.raw.test_sound);
-//            }
-//            if (!mediaPlayer.isPlaying()) {
-//                mediaPlayer.seekTo(0);
-//                mediaPlayer.start();
-//            } else {
-//                mediaPlayer.stop();
-//                mediaPlayer.release();
-//                mediaPlayer = MediaPlayer.create(context, R.raw.test_sound);
-//                mediaPlayer.start();
-//            }
-//        }
-//    }
+    public static void playSlideSound(Context context) {
+        mediaPlayer = MediaPlayer.create(context, R.raw.slide_sound);
+        if (soundsEnabled && mediaPlayer!=null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+        }
+    }
+
+    public static void playSwitchSound(Context context) {
+        mediaPlayer = MediaPlayer.create(context, R.raw.switch_sound);
+        if (soundsEnabled && mediaPlayer!=null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+        }
+    }
+
+    public static void playProgressBarSound(Context context) {
+        mediaPlayer = MediaPlayer.create(context, R.raw.progressbar_sound);
+        if (soundsEnabled && mediaPlayer!=null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+        }
+    }
+
+    public static void playButtonSound(Context context) {
+        mediaPlayer = MediaPlayer.create(context, R.raw.button_sound);
+        if (soundsEnabled && mediaPlayer!=null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+        }
+    }
+
+    public static void playAffirmativeButtonSound(Context context) {
+        mediaPlayer = MediaPlayer.create(context, R.raw.button_affirmative_sound);
+        if (soundsEnabled && mediaPlayer!=null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+        }
+    }
+
+    public static void playMessageReceivedSound(Context context) {
+        mediaPlayer = MediaPlayer.create(context, R.raw.message_received_sound);
+        if (soundsEnabled && mediaPlayer!=null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+        }
+    }
+
+    public static void playKeyboardClickSound(Context context) {
+        int[] soundIds = {R.raw.keyboard_click_sound_1, R.raw.keyboard_click_sound_2, R.raw.keyboard_click_sound_3};
+        int soundId = soundIds[random.nextInt(soundIds.length)];
+
+        mediaPlayer = MediaPlayer.create(context, soundId);
+
+        if (soundsEnabled && mediaPlayer!=null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+
+            // Set up a listener to release the MediaPlayer once playback is complete
+            mediaPlayer.setOnCompletionListener(mp -> {
+                if (mp != null) {
+                    mp.release();
+                    mediaPlayer = null;
+                }
+            });
+        }
+    }
+
 
 
 }

@@ -53,6 +53,7 @@ public class ItemReceivedMessage extends Fragment {
 
 
     private void openBottomSheetDialog() {
+        MainActivity.playSlideSound(getContext());
         String connectionId = ((MainActivity) getActivity()).getConnectionIdValue();
         DrawerBottomMessage dialog = new DrawerBottomMessage(docId, connectionId, (OnDialogDismissedListener) getActivity());
         dialog.show(getParentFragmentManager(), "MessageDialog");

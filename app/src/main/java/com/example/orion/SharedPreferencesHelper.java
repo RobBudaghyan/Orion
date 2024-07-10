@@ -5,12 +5,19 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
+
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 class SharedPreferencesHelper {
     private static final String KEY_STORAGE_CODE = "nQbcYh5VfI";
@@ -22,6 +29,8 @@ class SharedPreferencesHelper {
 
     private static final String SOUNDS_KEY = "sounds_key";
     private static final String BIOMETRIC_VERIFICATION_KEY = "bio_verification_key";
+
+    static final String CONTACTS_KEY = "contacts_key";
 
 
     // Return true if app is launched first time
@@ -82,7 +91,6 @@ class SharedPreferencesHelper {
             );
         } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
-            //
         }
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
@@ -116,13 +124,27 @@ class SharedPreferencesHelper {
         return prvKey;
     }
 
+    public static void saveContactsToSharedPreferences(Context context, List<Contact> contactList) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(contactList);
+        editor.putString(CONTACTS_KEY, json);
+        editor.apply();
+    }
 
+    public static List<Contact> loadContactsFromSharedPreferences(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(CONTACTS_KEY, null);
+        Type type = new TypeToken<ArrayList<Contact>>() {}.getType();
+        List<Contact> contacts = gson.fromJson(json, type);
+        if (contacts == null) {
+            contacts = new ArrayList<>();
+        }
+        return contacts;
+    }
 
-
-
-
-
-//
     public static void saveSoundsPreference(Context context,boolean value) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_SETTINGS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

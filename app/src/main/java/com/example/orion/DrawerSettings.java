@@ -26,7 +26,6 @@ public class DrawerSettings {
         switchSounds = activity.findViewById(R.id.switch_sounds);
         switchBioVerification = activity.findViewById(R.id.switch_bio_verification);
         changeIdBtn = activity.findViewById(R.id.change_id_btn);
-
         switchSounds.setChecked(SharedPreferencesHelper.getSoundsPreference(activity));
         switchBioVerification.setChecked(SharedPreferencesHelper.getBioVerificationPreference(activity));
 
@@ -42,14 +41,13 @@ public class DrawerSettings {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferencesHelper.saveBioVerificationPreference(activity,isChecked);
+                MainActivity.playSwitchSound(context);
             }
         });
 
-        changeIdBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showConfirmationDialog(activity);
-            }
+        changeIdBtn.setOnClickListener(v -> {
+            MainActivity.playButtonSound(context);
+            showConfirmationDialog(activity);
         });
 
 
@@ -70,12 +68,15 @@ public class DrawerSettings {
         AlertDialog dialog = builder.create();
 
         buttonYes.setOnClickListener(v -> {
+            MainActivity.playAffirmativeButtonSound(context);
             SharedPreferencesHelper.setFirstLaunch(activity, true);
             activity.startActivity(new Intent(activity, MainActivity.class));
             dialog.dismiss();
         });
 
-        buttonNo.setOnClickListener(v -> dialog.dismiss());
+        buttonNo.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
 
         dialog.show();
     }

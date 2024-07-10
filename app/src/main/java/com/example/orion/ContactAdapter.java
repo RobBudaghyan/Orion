@@ -46,14 +46,21 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         holder.contactId.setText(String.valueOf(contact.getId()));
 
         holder.copyButton.setOnClickListener(v -> {
+            MainActivity.playAffirmativeButtonSound(context);
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Contact ID", String.valueOf(contact.getId()));
+            ClipData clip = ClipData.newPlainText("Contact ID", contact.getName() + ": #" + contact.getId());
             clipboard.setPrimaryClip(clip);
         });
 
-        holder.messageButton.setOnClickListener(v -> listener.onMessageClick(contact.getId()));
+        holder.messageButton.setOnClickListener(v -> {
+            listener.onMessageClick(contact.getId());
+            MainActivity.playAffirmativeButtonSound(context);
+        });
 
-        holder.deleteButton.setOnClickListener(v -> listener.onDeleteClick(position));
+        holder.deleteButton.setOnClickListener(v -> {
+            listener.onDeleteClick(position);
+            MainActivity.playButtonSound(context);
+        });
     }
 
     @Override
