@@ -21,17 +21,34 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     private Context context;
     private OnContactActionListener listener;
 
+    /**
+     * Interface for handling contact actions.
+     */
     public interface OnContactActionListener {
         void onMessageClick(int contactId);
         void onDeleteClick(int position);
     }
 
+    /**
+     * Constructor for the ContactAdapter.
+     *
+     * @param contactList List of contacts.
+     * @param context Context of the application.
+     * @param listener Listener for contact actions.
+     */
     public ContactAdapter(List<Contact> contactList, Context context, OnContactActionListener listener) {
         this.contactList = contactList;
         this.context = context;
         this.listener = listener;
     }
 
+    /**
+     * Creates and returns a new ContactViewHolder object.
+     *
+     * @param parent The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     * @param viewType The view type of the new View.
+     * @return A new ContactViewHolder that holds a View of the given view type.
+     */
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,6 +56,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         return new ContactViewHolder(view);
     }
 
+    /**
+     * Replaces the contents of a view (invoked by the layout manager).
+     *
+     * @param holder The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Contact contact = contactList.get(position);
@@ -63,11 +86,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         });
     }
 
+    /**
+     * Returns the total number of items in the data set held by the adapter.
+     *
+     * @return The total number of items in this adapter.
+     */
     @Override
     public int getItemCount() {
         return contactList.size();
     }
 
+    /**
+     * ViewHolder class for holding contact item views.
+     */
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
         TextView contactName, contactId;
         ImageView copyButton, messageButton, deleteButton;
@@ -88,15 +119,31 @@ class Contact {
     private String name;
     private int id;
 
+    /**
+     * Constructor for the Contact class.
+     *
+     * @param name The name of the contact.
+     * @param id The ID of the contact.
+     */
     public Contact(String name, int id) {
         this.name = name;
         this.id = id;
     }
 
+    /**
+     * Returns the name of the contact.
+     *
+     * @return The name of the contact.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the ID of the contact.
+     *
+     * @return The ID of the contact.
+     */
     public int getId() {
         return id;
     }

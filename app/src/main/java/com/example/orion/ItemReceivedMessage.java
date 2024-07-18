@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.google.firebase.Timestamp;
 
 import java.util.Date;
@@ -18,40 +19,47 @@ import java.util.concurrent.TimeUnit;
 public class ItemReceivedMessage extends Fragment {
 
     private TextView senderIdTv;
-    private TextView messageReceivedTv;  // <-- Define it here
+    private TextView messageReceivedTv;
     private String senderId;
-    private String docId; // add this to store the document id
+    private String docId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.item_received_message, container, false);
 
+        // Initialize views
         senderIdTv = view.findViewById(R.id.sender_Id_Tv);
         messageReceivedTv = view.findViewById(R.id.message_received);
 
+        // Retrieve arguments
         if (getArguments() != null) {
-            senderId = "#" + getArguments().getString("senderId") ;
-            docId = getArguments().getString("docId"); // get the docId here
-
+            senderId = "#" + getArguments().getString("senderId");
+            docId = getArguments().getString("docId");
             Timestamp timestamp = getArguments().getParcelable("timestamp");
 
+            // Log and display timestamp
             if (timestamp != null) {
                 Log.d("ReceivedTimestamp", "Timestamp: " + timestamp.toDate().toString());
                 String timeAgo = getTimeAgo(timestamp);
                 messageReceivedTv.setText(timeAgo);
             } else {
                 Log.d("ReceivedTimestamp", "Timestamp is null");
+
             }
 
+            // Set sender ID
             senderIdTv.setText(senderId);
         }
 
+        // Set click listener to open bottom sheet dialog
         view.setOnClickListener(v -> openBottomSheetDialog());
 
         return view;
     }
 
-
+    /**
+     * Opens the bottom sheet dialog when the view is clicked.
+     */
     private void openBottomSheetDialog() {
         MainActivity.playSlideSound(getContext());
         String connectionId = ((MainActivity) getActivity()).getConnectionIdValue();
@@ -59,6 +67,12 @@ public class ItemReceivedMessage extends Fragment {
         dialog.show(getParentFragmentManager(), "MessageDialog");
     }
 
+    /**
+     * Converts a timestamp to a human-readable "time ago" format.
+     *
+     * @param timestamp The timestamp to convert.
+     * @return A string representing the time ago.
+     */
     public static String getTimeAgo(Timestamp timestamp) {
         Date date = timestamp.toDate();
         long currentTimeMillis = System.currentTimeMillis();
@@ -101,6 +115,10 @@ public class ItemReceivedMessage extends Fragment {
             return years + " years ago";
         }
     }
+
+    /**
+     * Updates the "time ago" text view with the current timestamp.
+     */
     public void updateTimeAgo() {
         Timestamp timestamp = getArguments().getParcelable("timestamp");
         if (timestamp != null) {

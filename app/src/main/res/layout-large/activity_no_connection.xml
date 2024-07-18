@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary">
+
+    <ImageView
+        android:id="@+id/no_connection_imageview"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="172dp"
+        android:background="@drawable/ic_no_connection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="?attr/colorPrimaryVariant"/>
+
+    <TextView
+        android:id="@+id/no_connection_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="No Connection!"
+        android:fontFamily="@font/orbitron_black"
+        android:textColor="@color/text_color"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="@+id/no_connection_imageview"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/no_connection_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/no_connection_imageview" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/retryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:text="↻ Retry"
+        android:textSize="26sp"
+        android:fontFamily="@font/orbitron_black"
+        android:textColor="@color/text_color"
+        android:background="@drawable/btn_style"
+        app:layout_constraintEnd_toEndOf="@+id/no_connection_imageview"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/no_connection_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/no_connection_textview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

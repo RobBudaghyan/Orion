@@ -2,17 +2,25 @@ package com.example.orion;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -80,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
     private FirebaseAuth mAuth;
     public static MediaPlayer mediaPlayer;
     private ProgressBar progressBar;
-    private ProgressBar progressBarRadar;
+
     private TextView connectionId;
     private TextView emptyTv;
     private TextView messageLengthTv;
@@ -121,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
         contactsBtn = findViewById(R.id.contacts_btn);
         settingsBtn = findViewById(R.id.settings_btn);
         progressBar = findViewById(R.id.progressBar);
-        progressBarRadar = findViewById(R.id.progressbar_radar);
         drawerLayout = findViewById(R.id.drawer_layout);
 
 
@@ -139,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
                                 .build())
                         .build();
         dataBase.setFirestoreSettings(settings);
+
+
 
         // Ensure secure window flag
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
@@ -269,8 +278,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             drawerLayout.openDrawer(GravityCompat.END);
         });
     }
-
-
 
     @Override
     protected void onResume() {
@@ -485,11 +492,9 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
                 QuerySnapshot querySnapshot = task.getResult();
                 if (querySnapshot != null && !querySnapshot.isEmpty()) {
                     emptyTv.setVisibility(View.GONE);
-                    progressBarRadar.setVisibility(View.GONE);
                     updateReceivedMessages(querySnapshot.getDocuments());
                 } else {
                     emptyTv.setVisibility(View.VISIBLE);
-                    progressBarRadar.setVisibility(View.GONE);
                     removeAllReceivedMessageFragments();
                 }
             } else {
@@ -600,7 +605,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
     private final Runnable progressbarRunnable = new Runnable() {
         @Override
         public void run() {
-            //if(connectionId.getText().toString().equals("- - - -") || R.layout.activity_no_connection)
             if(connectionId.getText().toString().equals("- - - -"))
                 progressStatus = 0;
             progressStatus += 1;
@@ -707,14 +711,11 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
 
 
 
+// *****************************************************************************************
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Other <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// *****************************************************************************************
 
-
-
-
-
-
-    /// not sorted methods here
-
+    // Play sounds
     public static void playSlideSound(Context context) {
         mediaPlayer = MediaPlayer.create(context, R.raw.slide_sound);
         if (soundsEnabled && mediaPlayer!=null) {
@@ -722,7 +723,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             mediaPlayer.start();
         }
     }
-
     public static void playSwitchSound(Context context) {
         mediaPlayer = MediaPlayer.create(context, R.raw.switch_sound);
         if (soundsEnabled && mediaPlayer!=null) {
@@ -730,7 +730,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             mediaPlayer.start();
         }
     }
-
     public static void playProgressBarSound(Context context) {
         mediaPlayer = MediaPlayer.create(context, R.raw.progressbar_sound);
         if (soundsEnabled && mediaPlayer!=null) {
@@ -738,7 +737,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             mediaPlayer.start();
         }
     }
-
     public static void playButtonSound(Context context) {
         mediaPlayer = MediaPlayer.create(context, R.raw.button_sound);
         if (soundsEnabled && mediaPlayer!=null) {
@@ -746,7 +744,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             mediaPlayer.start();
         }
     }
-
     public static void playAffirmativeButtonSound(Context context) {
         mediaPlayer = MediaPlayer.create(context, R.raw.button_affirmative_sound);
         if (soundsEnabled && mediaPlayer!=null) {
@@ -754,7 +751,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             mediaPlayer.start();
         }
     }
-
     public static void playMessageReceivedSound(Context context) {
         mediaPlayer = MediaPlayer.create(context, R.raw.message_received_sound);
         if (soundsEnabled && mediaPlayer!=null) {
@@ -762,7 +758,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             mediaPlayer.start();
         }
     }
-
     public static void playKeyboardClickSound(Context context) {
         int[] soundIds = {R.raw.keyboard_click_sound_1, R.raw.keyboard_click_sound_2, R.raw.keyboard_click_sound_3};
         int soundId = soundIds[random.nextInt(soundIds.length)];
@@ -782,7 +777,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
             });
         }
     }
-
 
 
 }

@@ -1,0 +1,60 @@
+<!-- dialog_confirmation.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/box_round_corners_background"
+    android:padding="14dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Are you sure?"
+        android:textColor="@color/text_color"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You will be unable to return this contact!"
+        android:textSize="20sp"
+        android:textColor="@color/primary_1"
+        android:gravity="center"
+        android:paddingBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_button_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textAlignment="center"
+            android:textSize="29sp"
+            android:background="@drawable/btn_style"
+            android:fontFamily="@font/orbitron_black"
+            android:layout_marginRight="10dp"
+            android:text="No"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_button_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="29sp"
+            android:textColor="@color/text_color"
+            android:background="@drawable/btn_style"
+            android:fontFamily="@font/orbitron_black"
+            android:text="Yes"/>
+    </LinearLayout>
+
+</LinearLayout>

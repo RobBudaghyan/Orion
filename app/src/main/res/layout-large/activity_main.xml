@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
+
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +30,8 @@
 
             <ImageView
                 android:id="@+id/contacts_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="start"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="0.2"
@@ -45,6 +46,7 @@
                 android:fontFamily="@font/orbitron_black"
                 android:gravity="right"
                 android:text="Your ID# "
+                android:textSize="24sp"
                 android:textColor="@color/primary_1"
                 tools:ignore="MissingConstraints" />
 
@@ -57,13 +59,13 @@
                 android:gravity="left"
                 android:text="- - - -"
                 android:textColor="@color/text_color"
-                android:textSize="18sp"
+                android:textSize="26sp"
                 tools:ignore="MissingConstraints" />
 
             <ImageView
                 android:id="@+id/settings_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="start"
                 android:layout_marginRight="15dp"
                 android:layout_weight="0.2"
@@ -73,8 +75,8 @@
 
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_hashtag"
             app:layout_constraintBottom_toBottomOf="@+id/input_id"
             app:layout_constraintEnd_toStartOf="@+id/input_id"
@@ -95,8 +97,8 @@
             android:text=""
             android:textColor="@color/text_color"
             android:textColorHint="@color/secondary_2"
-            android:textSize="24sp"
-            android:layout_marginTop="20dp"
+            android:textSize="32sp"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -106,19 +108,19 @@
         <EditText
             android:id="@+id/input_message"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="24dp"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="90dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/box_round_corners_background"
             android:ems="10"
             android:gravity="start"
             android:hint="Enter text here"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:fontFamily="@font/orbitron_black"
             android:inputType="textMultiLine"
             android:maxLength="210"
             android:overScrollMode="ifContentScrolls"
-            android:padding="15dp"
+            android:padding="25dp"
             android:scrollbars="vertical"
             android:text=""
             android:textColor="@color/text_color"
@@ -134,7 +136,7 @@
             android:layout_margin="10dp"
             android:text="0/210"
             android:textColor="@color/secondary_2"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:fontFamily="@font/orbitron_black"
             app:layout_constraintBottom_toBottomOf="@id/input_message"
             app:layout_constraintEnd_toEndOf="@+id/input_message" />
@@ -144,12 +146,12 @@
             android:id="@+id/send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="26dp"
             android:background="@drawable/btn_style"
             android:text="Send ➤"
             android:fontFamily="@font/orbitron_black"
             android:textColor="@color/text_color"
-            android:textSize="22sp"
+            android:textSize="34sp"
             android:textAlignment="center"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/input_message"
@@ -166,7 +168,7 @@
             android:fontFamily="@font/orbitron_black"
             android:text=""
             android:textColor="@color/secondary_2"
-            android:textSize="15sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/scrollView"
             app:layout_constraintEnd_toEndOf="@+id/send_button"
             app:layout_constraintHorizontal_bias="0.511"
@@ -177,8 +179,8 @@
             android:id="@+id/scrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginBottom="72dp"
+            android:layout_marginHorizontal="90dp"
+            android:layout_marginBottom="100dp"
             android:background="@drawable/box_round_corners_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -200,8 +202,7 @@
                     android:fontFamily="@font/orbitron_black"
                     android:text="Waiting for incoming messages . . ."
                     android:textColor="@color/secondary_2"
-                    android:textSize="18sp" />
-
+                    android:textSize="24sp" />
             </LinearLayout>
         </ScrollView>
 
@@ -209,11 +210,10 @@
             android:id="@+id/progressBar"
             style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="10dp"
             android:layout_centerInParent="true"
-            android:layout_marginStart="50dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginHorizontal="100dp"
             android:indeterminate="false"
             android:max="100"
             android:progress="0"
@@ -227,6 +227,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/drawer_contacts" />
-    wwwwwwwwwwwwwwwwwwwwwwwwwwww<include layout="@layout/drawer_settings" />
+    <include layout="@layout/drawer_settings" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

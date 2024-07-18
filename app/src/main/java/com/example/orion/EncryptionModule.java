@@ -13,14 +13,22 @@ import javax.crypto.NoSuchPaddingException;
 
 public class EncryptionModule {
 
-
+    /**
+     * Encrypts the given text using the provided public key.
+     *
+     * @param publicKey the public key used for encryption
+     * @param text the plaintext to be encrypted
+     * @return the encrypted text, encoded in Base64
+     * @throws NoSuchPaddingException if the specified padding scheme is not available
+     * @throws NoSuchAlgorithmException if the specified algorithm is not available
+     * @throws InvalidKeyException if the provided key is invalid
+     * @throws IllegalBlockSizeException if the plaintext size is invalid
+     * @throws BadPaddingException if there's an issue with the padding
+     */
     public static String runEncrypt(PublicKey publicKey, String text)
             throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
-        PublicKey rsaPublicKey;
-
-        rsaPublicKey = publicKey;
-
+        PublicKey rsaPublicKey = publicKey;
         Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
         cipher.init(Cipher.ENCRYPT_MODE, rsaPublicKey);
         byte[] encryptedBytes = cipher.doFinal(text.getBytes(StandardCharsets.UTF_8));
@@ -28,6 +36,18 @@ public class EncryptionModule {
         return Base64.encodeToString(encryptedBytes, Base64.DEFAULT);
     }
 
+    /**
+     * Decrypts the given text using the provided private key.
+     *
+     * @param privateKey the private key used for decryption
+     * @param text the encrypted text, encoded in Base64
+     * @return the decrypted text, or an error message if decryption fails
+     * @throws NoSuchPaddingException if the specified padding scheme is not available
+     * @throws NoSuchAlgorithmException if the specified algorithm is not available
+     * @throws InvalidKeyException if the provided key is invalid
+     * @throws IllegalBlockSizeException if the encrypted text size is invalid
+     * @throws BadPaddingException if there's an issue with the padding
+     */
     public static String runDecrypt(PrivateKey privateKey, String text)
             throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher1 = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
@@ -41,6 +61,4 @@ public class EncryptionModule {
 
         return new String(decryptedBytes);
     }
-
 }
-

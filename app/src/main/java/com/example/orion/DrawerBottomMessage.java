@@ -20,67 +20,69 @@ import java.security.PrivateKey;
 public class DrawerBottomMessage extends BottomSheetDialogFragment {
 
     private PrivateKey privateKey;
-
     private TextView messageTv, senderIdTv;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String docId;
-
     private String connectionId;
-
     private ImageView closeBtn;
-
     private OnDialogDismissedListener listener;
-
     private TextView copyBtn;
 
+    // Constructor
     public DrawerBottomMessage(String docId, String connectionId, OnDialogDismissedListener listener) {
         this.docId = docId;
         this.connectionId = connectionId;
         this.listener = listener;
     }
 
-
+    // Called when the fragment's view is created
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.drawer_bottom_message, container, false);
+        initializeViews(v);
+        setClickListeners();
+        fetchMessage();
+        return v;
+    }
+
+    // Initialize views
+    private void initializeViews(View v) {
         closeBtn = v.findViewById(R.id.close_btn);
         messageTv = v.findViewById(R.id.message_tv);
         senderIdTv = v.findViewById(R.id.sender_Id_Tv);
         copyBtn = v.findViewById(R.id.copy_btn);
+    }
 
-        // Set the click listener
-        closeBtn.setOnClickListener(v1 -> {
+    // Set click listeners for the buttons
+    private void setClickListeners() {
+        closeBtn.setOnClickListener(v -> {
             dismiss();
             MainActivity.playSlideSound(getContext());
         });
 
         copyBtn.setOnClickListener(view -> {
-            // Get the text from messageTv
-            CharSequence textToCopy = messageTv.getText();
-
-            // Use the ClipboardManager to copy the text to the clipboard
-            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", textToCopy);
-            clipboard.setPrimaryClip(clip);
-
-            // Provide feedback to the user
-            copyBtn.setText("❐ COPIED!");
-
+            copyMessageToClipboard();
             MainActivity.playAffirmativeButtonSound(getContext());
         });
-
-
-
-        fetchMessage();
-
-        return v;
     }
+
+    // Copy message to clipboard
+    private void copyMessageToClipboard() {
+        CharSequence textToCopy = messageTv.getText();
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", textToCopy);
+        clipboard.setPrimaryClip(clip);
+        copyBtn.setText("❐ COPIED!");
+    }
+
+    // Called when the fragment is created
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setCancelable(false); // This will make the dialog non-cancellable
     }
 
+    // Fetch message from Firestore
     private void fetchMessage() {
         db.collection("Users").document(connectionId).collection("MS").document(docId)
                 .get()
@@ -89,17 +91,18 @@ public class DrawerBottomMessage extends BottomSheetDialogFragment {
                         String message = documentSnapshot.getString("message");
                         String sender = documentSnapshot.getString("sender");
 
-                        //
                         privateKey = MainActivity.privateKey;
                         try {
-                            message = EncryptionModule.runDecrypt(privateKey,message);
+                            message = EncryptionModule.runDecrypt(privateKey, message);
                         } catch (Exception e) {
-                            Toast.makeText(getContext(), "Exception while dectyption", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Exception while decryption", Toast.LENGTH_SHORT).show();
                             message = "Error 404";
                         }
+
                         senderIdTv.setText("# " + sender);
                         messageTv.setText(message);
                         removeMessageFromFirestore();
+
                         if (listener != null) {
                             listener.onDialogDismissed();
                         }
@@ -112,11 +115,7 @@ public class DrawerBottomMessage extends BottomSheetDialogFragment {
                 });
     }
 
-    @Override
-    public void onDismiss(@NonNull DialogInterface dialog) {
-        super.onDismiss(dialog);
-    }
-
+    // Remove message from Firestore
     private void removeMessageFromFirestore() {
         db.collection("Users").document(connectionId).collection("MS").document(docId)
                 .delete()
@@ -128,6 +127,9 @@ public class DrawerBottomMessage extends BottomSheetDialogFragment {
                 });
     }
 
-
+    // Called when the dialog is dismissed
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+    }
 }
-

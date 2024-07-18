@@ -3,6 +3,7 @@ package com.example.orion;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
 
@@ -32,14 +33,13 @@ class SharedPreferencesHelper {
 
     static final String CONTACTS_KEY = "contacts_key";
 
-
-    // Return true if app is launched first time
+    // Check if the app is launched for the first time
     protected static boolean isFirstLaunch(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(KEY_FIRST_LAUNCH, true);
     }
 
-    // Sets value that app is launched first time
+    // Set the first launch flag
     public static void setFirstLaunch(Context context, boolean isFirstLaunch) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -47,15 +47,15 @@ class SharedPreferencesHelper {
         editor.apply();
     }
 
-    // Return the privateKey from secure shared preferences
-    protected static PrivateKey getPrivateKeyFromEncryptedSharedPreferences(Context context){
+    // Retrieve the private key from encrypted shared preferences
+    protected static PrivateKey getPrivateKeyFromEncryptedSharedPreferences(Context context) {
         String masterKeyAlias = null;
         try {
             masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
         } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
-            //
         }
+
         SharedPreferences sharedPreferences = null;
         try {
             sharedPreferences = EncryptedSharedPreferences.create(
@@ -68,18 +68,19 @@ class SharedPreferencesHelper {
         } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
         }
-        return stringToPrivateKey(sharedPreferences.getString(PRIVATE_KEY_CODE,""));
+
+        return stringToPrivateKey(sharedPreferences.getString(PRIVATE_KEY_CODE, ""));
     }
 
-    // Save the privateKey to secure shared preferences
-    protected static void savePrivateKeyToEncryptedSharedPreferences(PrivateKey privateKey, Context context){
+    // Save the private key to encrypted shared preferences
+    protected static void savePrivateKeyToEncryptedSharedPreferences(PrivateKey privateKey, Context context) {
         String masterKeyAlias = null;
         try {
             masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
         } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
-            //
         }
+
         SharedPreferences sharedPreferences = null;
         try {
             sharedPreferences = EncryptedSharedPreferences.create(
@@ -92,6 +93,7 @@ class SharedPreferencesHelper {
         } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
         }
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.putString(PRIVATE_KEY_CODE, privateKeyToString(privateKey));
@@ -99,31 +101,30 @@ class SharedPreferencesHelper {
     }
 
     // Convert Private Key to Base64 String
-    private static String privateKeyToString(PrivateKey privateKey){
-        String str = "";
+    private static String privateKeyToString(PrivateKey privateKey) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            str = Base64.getEncoder().encodeToString(privateKey.getEncoded());
+            return Base64.getEncoder().encodeToString(privateKey.getEncoded());
         }
-        return str;
+        return "";
     }
 
     // Convert Base64 String to Private Key
     private static PrivateKey stringToPrivateKey(String privateK) {
-        PrivateKey prvKey = null;
         try {
             byte[] privateBytes = new byte[0];
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 privateBytes = Base64.getDecoder().decode(privateK);
             }
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateBytes);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            prvKey = keyFactory.generatePrivate(keySpec);
+            return keyFactory.generatePrivate(keySpec);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return prvKey;
+        return null;
     }
 
+    // Save the contact list to shared preferences
     public static void saveContactsToSharedPreferences(Context context, List<Contact> contactList) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -133,40 +134,41 @@ class SharedPreferencesHelper {
         editor.apply();
     }
 
+    // Load the contact list from shared preferences
     public static List<Contact> loadContactsFromSharedPreferences(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(CONTACTS_KEY, null);
         Type type = new TypeToken<ArrayList<Contact>>() {}.getType();
         List<Contact> contacts = gson.fromJson(json, type);
-        if (contacts == null) {
-            contacts = new ArrayList<>();
-        }
-        return contacts;
+        return contacts == null ? new ArrayList<>() : contacts;
     }
 
-    public static void saveSoundsPreference(Context context,boolean value) {
+    // Save the sound preference to shared preferences
+    public static void saveSoundsPreference(Context context, boolean value) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_SETTINGS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(SOUNDS_KEY, value);
         editor.apply();
     }
 
+    // Retrieve the sound preference from shared preferences
     public static boolean getSoundsPreference(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_SETTINGS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(SOUNDS_KEY, false);
     }
 
-    public static void saveBioVerificationPreference(Context context,boolean value) {
+    // Save the biometric verification preference to shared preferences
+    public static void saveBioVerificationPreference(Context context, boolean value) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_SETTINGS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(BIOMETRIC_VERIFICATION_KEY, value);
         editor.apply();
     }
 
+    // Retrieve the biometric verification preference from shared preferences
     public static boolean getBioVerificationPreference(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_SETTINGS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(BIOMETRIC_VERIFICATION_KEY, false);
     }
-
 }
