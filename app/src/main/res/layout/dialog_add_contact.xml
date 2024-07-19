@@ -56,6 +56,7 @@
             android:textColorHint="@color/secondary_2"
             android:fontFamily="@font/orbitron_black"
             android:maxLength="7"
+            android:textColor="@color/text_color"
             android:textSize="19sp"
             android:padding="12dp"
             android:layout_marginStart="10dp"

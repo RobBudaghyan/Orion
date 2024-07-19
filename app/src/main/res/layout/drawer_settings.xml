@@ -9,11 +9,6 @@
     android:background="@drawable/box_right_background">
 
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/fragment_container"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/Theme.Spanakh"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,6 +100,40 @@
             android:fontFamily="@font/orbitron_black"
             android:textStyle="bold"
             android:text="Change"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="App Guide"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="start"/>
+
+        <TextView
+            android:id="@+id/githubLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open"
+            android:textColor="@color/primary_1"
+            android:fontFamily="@font/orbitron_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="end"/>
+
 
     </LinearLayout>
 

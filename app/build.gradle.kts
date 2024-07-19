@@ -51,7 +51,4 @@ dependencies {
     implementation ("androidx.preference:preference:1.2.1")
     implementation ("androidx.core:core:1.13.1")
 
-    implementation ("com.google.firebase:firebase-messaging:24.0.0")
-
-
 }

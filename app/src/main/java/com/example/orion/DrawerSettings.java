@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 public class DrawerSettings {
 
     private androidx.appcompat.widget.SwitchCompat switchSounds;
     private androidx.appcompat.widget.SwitchCompat switchBioVerification;
+    private TextView githubLink;
     private Button changeIdBtn;
     private Context context;
     private MainActivity mainActivity;
@@ -21,6 +24,7 @@ public class DrawerSettings {
     public DrawerSettings(Activity activity) {
         this.context = activity;
         this.mainActivity = (MainActivity) activity;
+
 
         initializeViews(activity);
         initializeSwitchStates(activity);
@@ -33,6 +37,7 @@ public class DrawerSettings {
         switchSounds = activity.findViewById(R.id.switch_sounds);
         switchBioVerification = activity.findViewById(R.id.switch_bio_verification);
         changeIdBtn = activity.findViewById(R.id.change_id_btn);
+        githubLink = activity.findViewById(R.id.githubLink);
     }
 
     // Initialize switch states from SharedPreferences
@@ -43,20 +48,20 @@ public class DrawerSettings {
 
     // Set listeners for switches
     private void setSwitchListeners(Activity activity) {
-        switchSounds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferencesHelper.saveSoundsPreference(activity, isChecked);
-                MainActivity.soundsEnabled = isChecked;
-            }
+        switchSounds.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferencesHelper.saveSoundsPreference(activity, isChecked);
+            MainActivity.soundsEnabled = isChecked;
         });
 
-        switchBioVerification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferencesHelper.saveBioVerificationPreference(activity, isChecked);
-                MainActivity.playSwitchSound(context);
-            }
+        switchBioVerification.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferencesHelper.saveBioVerificationPreference(activity, isChecked);
+            MainActivity.playSwitchSound(context);
+        });
+        githubLink.setOnClickListener(v -> {
+            String url = "https://github.com/RobBudaghyan/Orion.git";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            activity.startActivity(intent);
         });
     }
 

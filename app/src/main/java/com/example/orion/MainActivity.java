@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
         settingsBtn = findViewById(R.id.settings_btn);
         progressBar = findViewById(R.id.progressBar);
         drawerLayout = findViewById(R.id.drawer_layout);
-
+        random = new Random();
 
         // Check if user launched app first time
         if (SharedPreferencesHelper.isFirstLaunch(this)) {
@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissed
 
         // Ensure secure window flag
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        random = new Random();
 
         // Initialize keys
         try {
