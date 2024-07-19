@@ -29,65 +29,31 @@ Orion's aim to exchange messages between users all over the world with top lever
 
 In order to send a message to a user, you need to have user's ID (every user has its own unique ID). Then write the message in message input space, and press "Send" button.
 
-<img src="https://media3.giphy.com/media/aUovxH8Vf9qDu/giphy.gif" alt="hippo" width="800">
+<img src="https://drive.google.com/uc?export=view&id=1k8jSRjdx20qXXxBQtuS3Xp3ul1zak9JP" alt="img" width="1000">
 
 #### Receive Message
 
-#### Add Contacts
+When a user sends you a message, a notification of a new message will appear in lower space. The notifications contains information about the date when the message has been received and the ID of the sender. Note that when you open the message it will be automatically DELETED and you can NEVER recover it's content.
+
+<img src="https://drive.google.com/uc?export=view&id=1eoV4hDSTnEjdrumRXK0jnBlknD-5nO6R" alt="Project Image" width="1000">
 
 #### Add Contacts
+
+If you want to save an ID of a user, you can save a user's contact by adding contact's exact user ID and give a name to it.
+
+<img src="https://drive.google.com/uc?export=view&id=1a9EbYe9qz2zPm1UN8fRCpLroeliNIH1C" alt="Project Image" width="1000">
 
 #### Preferences
 
+???????????????????????
+
 #### Installation
 
-
-
-#### API Reference
-
-```html
-    <p>dummy code</p>
-```
-[Back To The Top](#read-me-template)
+Folder with lates Orion version - [Link](https://drive.google.com/drive/folders/1vNKswAx-Fpkmz-yexMaAC5pFCoXFwzSW?usp=drive_link)
 
 ---
 
-## References
-[Back To The Top](#read-me-template)
-
----
-
-## License
-
-MIT License
-
-Copyright (c) [2017] [James Q Quick]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-[Back To The Top](#read-me-template)
-
----
 
 ## Author Info
 
-- Twitter - [@jamesqquick](https://twitter.com/jamesqquick)
-- Website - [James Q Quick](https://jamesqquick.com)
-
-[Back To The Top](#read-me-template)
+- Instagram - [@rob_budaghyan](https://www.instagram.com/rob.budaghyan/)
