@@ -3,23 +3,13 @@
 <img src="https://drive.google.com/uc?export=view&id=1S1qSDzIRkwIqCPgyCMMa7JD_l_DO6Hjv" alt="Project Image" width="100">
 
 
-### Send and receive messages with unbreakable encryption all over the world!
-
----
-
-### Table of Contents
-
-- [Description](#description)
-- [How To Use](#how-to-use)
-- [References](#references)
-- [License](#license)
-- [Author Info](#author-info)
+```Send and receive messages with unbreakable encryption all over the world! ```
 
 ---
 
 ## Description
 
-Orion's aim to exchange messages between users all over the world with top lever encryption and security. The main goal of the application is the security of the messages, because it's working principle excludes any third party from accessing the messages (see ????? for more). The message sent to user is stored encrypted in database, until it is opened by the user. When the message is opened by the receiver, it is automaticaly deleted from database.
+Orion's aim to exchange messages between users all over the world with top level encryption and security. The main goal of the application is the security of the messages, because it's working principle excludes any third party from accessing the messages (see ????? for more). The message sent to user is stored encrypted in database, until it is opened by the user. When the message is opened by the receiver, it is automaticaly deleted from database.
 
 ---
 
@@ -52,6 +42,10 @@ If you want to save an ID of a user, you can save a user's contact by adding con
 Folder with lates Orion version - [Link](https://drive.google.com/drive/folders/1vNKswAx-Fpkmz-yexMaAC5pFCoXFwzSW?usp=drive_link)
 
 ---
+
+## Working Principle
+
+
 
 
 ## Author Info
