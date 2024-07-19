@@ -11,7 +11,7 @@ Send and receive messages with unbreakable encryption all over the world!
 
 ## Description
 
-Orion's aim to exchange messages between users all over the world with top level encryption and security. The main goal of the application is the security of the messages, because it's working principle excludes any third party from accessing the messages (see ????? for more). The message sent to user is stored encrypted in database, until it is opened by the user. When the message is opened by the receiver, it is automaticaly deleted from database.
+Orion's aim to exchange messages between users all over the world with top level encryption and security. The main goal of the application is the security of the messages, because it's working principle excludes any third party from accessing the messages (see [Working Principle](#working-principle) for more). The message sent to user is stored encrypted in database, until it is opened by the user. When the message is opened by the receiver, it is automaticaly deleted from database.
 
 ---
 
