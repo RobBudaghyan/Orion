@@ -39,7 +39,7 @@ If you want to save an ID of a user, you can save a user's contact by adding con
 
 In settings you can enable interface sounds, a biometric verification using fingerprints and patterns in order to restrict access to Orion on your device. You are allowed to change your unique User ID for security reasons (Note that you WILL NOT be able to retrieve your previous ID and it's messages). Feel free to use online Orion Guide if you need any help using Orion.
 
-<img src="https://drive.google.com/uc?export=view&id=14onGR89cMkaY-4Vwz_75pzaGgqV7TuOLC" alt="img" width="1000">
+<img src="https://drive.google.com/uc?export=view&id=14onGR89cMkaY-4Vwz_75pzaGgqV7TuOL" alt="img" width="1000">
 
 #### Installation
 
