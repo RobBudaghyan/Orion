@@ -1,6 +1,6 @@
 # Orion
 
-<img src="https://drive.google.com/uc?export=view&id=1S1qSDzIRkwIqCPgyCMMa7JD_l_DO6Hjv" alt="Project Image" width="100">
+<img src="https://drive.google.com/uc?export=view&id=1V52Kg-5NLoOi69W51K8FjzsTO6miICbb" alt="Project Image" width="1000">
 
 
 ```Send and receive messages with unbreakable encryption all over the world! ```
@@ -25,13 +25,13 @@ In order to send a message to a user, you need to have user's ID (every user has
 
 When a user sends you a message, a notification of a new message will appear in lower space. The notifications contains information about the date when the message has been received and the ID of the sender. Note that when you open the message it will be automatically DELETED and you can NEVER recover it's content.
 
-<img src="https://drive.google.com/uc?export=view&id=1eoV4hDSTnEjdrumRXK0jnBlknD-5nO6R" alt="Project Image" width="1000">
+<img src="https://drive.google.com/uc?export=view&id=1eoV4hDSTnEjdrumRXK0jnBlknD-5nO6R" alt="img" width="1000">
 
 #### Add Contacts
 
 If you want to save an ID of a user, you can save a user's contact by adding contact's exact user ID and give a name to it.
 
-<img src="https://drive.google.com/uc?export=view&id=1a9EbYe9qz2zPm1UN8fRCpLroeliNIH1C" alt="Project Image" width="1000">
+<img src="https://drive.google.com/uc?export=view&id=1a9EbYe9qz2zPm1UN8fRCpLroeliNIH1C" alt="img" width="1000">
 
 #### Preferences
 
