@@ -3,7 +3,9 @@
 <img src="https://drive.google.com/uc?export=view&id=1V52Kg-5NLoOi69W51K8FjzsTO6miICbb" alt="Project Image" width="1000">
 
 
-```Send and receive messages with unbreakable encryption all over the world! ```
+```
+Send and receive messages with unbreakable encryption all over the world!
+```
 
 ---
 
@@ -39,12 +41,15 @@ If you want to save an ID of a user, you can save a user's contact by adding con
 
 #### Installation
 
-Folder with lates Orion version - [Link](https://drive.google.com/drive/folders/1vNKswAx-Fpkmz-yexMaAC5pFCoXFwzSW?usp=drive_link)
+Folder with lates Orion version - [APK Download](https://drive.google.com/drive/folders/1vNKswAx-Fpkmz-yexMaAC5pFCoXFwzSW?usp=drive_link)
 
 ---
 
 ## Working Principle
 
+Orion uses RSA public and private keys to exchange messages through its servers. It uses 2048 bit keys, which guarantees the safety of the user's message. For instance, in order for a computer to crack the cipher stored in Orion's servers 300 trillion years are needed :) Here's a simple visual representation of the working principle of messaging.
+
+<img src="https://drive.google.com/uc?export=view&id=1c2zTpj1fExo1nHTSSGkr2U8dT6CvAXl0" alt="img" width="1000">
 
 
 
