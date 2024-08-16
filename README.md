@@ -47,7 +47,7 @@ In settings you can:
 
 #### Installation
 
-Folder with lates Orion version - [APK Download](https://drive.google.com/drive/folders/1vNKswAx-Fpkmz-yexMaAC5pFCoXFwzSW?usp=drive_link)
+Folder with latest Orion version - [APK Download](https://drive.google.com/drive/folders/1vNKswAx-Fpkmz-yexMaAC5pFCoXFwzSW?usp=drive_link)
 
 ---
 
